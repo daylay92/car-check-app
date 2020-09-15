@@ -1,0 +1,18 @@
+{
+  "name": "proto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "chmod +x ./compile.proto.sh && ./compile.proto.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "grpc_tools_node_protoc_ts": "^4.1.4",
+    "ts-proto": "^1.12.0"
+  }
+}

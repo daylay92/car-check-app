@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package auth;
+
+service AuthService {
+  rpc Login (LoginDetails) returns (LoginResponse) {}
+  rpc Signup (SignupDetails) returns (LoginResponse) {}
+  rpc Authenticate(TokenData) returns (DecodedResponse){}
+}
+
+message LoginDetails {
+    string email = 1;
+    string password = 2;
+}
+
+message TokenData {
+    string token = 1;
+}
+
+message DecodedResponse{
+    string id = 1;
+    string email = 2;
+    bool isAdmin = 3;
+}
+
+message LoginResponse {
+    string id = 1;
+    string email = 2;
+    string firstName = 3;
+    string lastName = 4;
+    bool isAdmin = 5;
+    string token = 6;
+    string createdAt = 7;
+}
+
+message SignupDetails {
+  string email = 1;
+  string password = 2;
+  string firstName = 3;
+  string lastName = 4;
+}

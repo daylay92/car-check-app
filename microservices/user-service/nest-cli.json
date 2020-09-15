@@ -1,0 +1,8 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "entryFile": "./microservices/user-service/src/main",
+  "compilerOptions":  {
+    "assets": [{ "include": "*.proto", "watchAssets": true }]
+  }
+}

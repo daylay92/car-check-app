@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package wallet;
+
+service WalletService {
+  rpc Create (WalletUser) returns (NewWallet) {}
+  rpc Topup (TransactData) returns (TransactDetails) {}
+  rpc GetWallet(WalletUser) returns (WalletDetails){}
+  rpc CheckExist(WalletUser) returns (IsExist){}
+  rpc DebitWallet(TransactData) returns (TransactDetails){}
+}
+
+message WalletUser {
+    string userId = 1;
+}
+
+message TransactData {
+    string userId = 1;
+    double amount = 2; 
+}
+
+message NewWallet {
+  string owner = 1;
+  double balance = 2; 
+  string createdAt = 3;
+  string id = 4;
+}
+message TransactDetails {
+  string owner = 1;
+  double newBalance = 2; 
+  double oldBalance = 3;
+  string createdAt = 4;
+  string updatedAt = 5;
+  string id = 6;
+}
+
+message WalletDetails {
+  string owner = 1;
+  double balance = 2; 
+  string createdAt = 3;
+  string id = 4;
+  string updatedAt = 5;
+}
+
+message IsExist{
+    bool isExist = 1;
+}

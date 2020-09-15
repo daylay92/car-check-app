@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package car;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+
+service CarService {
+  rpc Create (CarData) returns (NewCar) {}
+  rpc FindCar (CarId) returns (CarResponse) {}
+  rpc FetchAll(google.protobuf.Empty) returns (CarList){}
+  rpc UpdateCar (CarUpdateData) returns (CarResponse) {}
+}
+
+message CarId {
+  string id = 1;
+}
+
+message CarResponse {
+  string id = 1;
+  string make = 2;
+  string carModel = 3;
+  string vin  = 4;
+  double price = 5;
+  string location = 6;
+  repeated string features = 7;
+  string createdAt = 8;
+  string updatedAt = 9;
+}
+message CarList {
+    repeated CarResponse cars = 1;
+}
+
+message NewCar {
+  string id = 1;
+  string make = 2;
+  string carModel = 3;
+  string vin  = 4;
+  double price = 5;
+  string location = 6;
+  repeated string features = 7;
+  string createdAt = 8;
+}
+
+message CarData {
+    string make = 1;
+    string carModel = 2;
+    string vin  = 3;
+    double price = 4;
+    string location = 5;
+    repeated string features = 6;
+  }
+
+ message CarUpdateData {
+     string id = 1;
+     google.protobuf.StringValue  make = 2;
+     google.protobuf.StringValue carModel = 3;
+     google.protobuf.StringValue vin  = 4;
+     google.protobuf.DoubleValue price = 5;
+     google.protobuf.StringValue location = 6;
+     repeated google.protobuf.StringValue features = 7;
+ }

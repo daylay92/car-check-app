@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package user;
+
+service UserService {
+  rpc Create (UserData) returns (NewUser) {}
+  rpc FindUser (UserId) returns (UserResponse) {}
+  rpc FindUserByEmail (UserEmail) returns (UserResponse) {}
+  rpc DoesUserExistByEmail (UserEmail) returns (IsValid) {}
+}
+
+message UserId {
+  string id = 1;
+}
+
+message UserEmail {
+  string email = 1;
+}
+
+message UserResponse {
+  string id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string hash  = 4;
+  string email = 5;
+  bool isAdmin = 6;
+  string createdAt = 7;
+  string updatedAt = 8;
+}
+
+message UserData {
+    string firstName = 1;
+    string lastName = 2;
+    string hash  = 3;
+    string email = 4;
+  }
+
+message NewUser {
+    string id = 1;
+    string firstName = 2;
+    string lastName = 3;
+    string email = 4;
+    bool isAdmin = 5;
+    string createdAt = 6;
+  }
+
+  message IsValid {
+    bool isExist = 1;
+  }
