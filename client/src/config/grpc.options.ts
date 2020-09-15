@@ -41,7 +41,7 @@ export const walletServiceOptions: ServiceOptions = {
       url: config()['CAR_SERVICE_URL'],
     },
   };
-
+console.log(carServiceOptions)
   export const orderServiceOptions: ServiceOptions = {
     name: 'ORDER_PACKAGE',
     transport: Transport.GRPC,

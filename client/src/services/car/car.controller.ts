@@ -31,6 +31,7 @@ import {
         const car = await this.carService.Create(data);
         return car;
       } catch (e) {
+        console.log(e)
         throw new HttpException(e.details, 500);
       }
     }
