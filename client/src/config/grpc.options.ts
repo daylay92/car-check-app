@@ -46,7 +46,7 @@ export const walletServiceOptions: ServiceOptions = {
     name: 'ORDER_PACKAGE',
     transport: Transport.GRPC,
     options: {
-      package: 'car',
+      package: 'order',
       protoPath: join(__dirname, '../../../proto/order.proto'),
       url: config()['ORDER_SERVICE_URL'],
     },
