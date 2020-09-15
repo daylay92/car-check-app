@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package order;
+
+import "google/protobuf/empty.proto";
+
+service OrderService {
+  rpc Create (OrderData) returns (NewOrder) {}
+  rpc FetchAllOrder (google.protobuf.Empty) returns (OrderList) {}
+}
+
+message NewOrder {
+  string id = 1;
+  string userId = 2;
+  string firstName = 3;
+  string lastName = 4;
+  string carId = 5;
+  string make = 6;
+  string vin = 7;
+  double totalCost = 8;
+  string carModel = 9;
+  int32 total = 10;
+  string createdAt = 11;
+  string updatedAt = 12;
+}
+
+message OrderData {
+    string userId = 1;
+    string carId = 2;
+    int32 total = 3;
+}
+
+message OrderList {
+    repeated NewOrder orders = 1;
+}

@@ -9,8 +9,8 @@ export class CarService {
   constructor(@InjectModel(Car.name) private carModel: Model<Car>) {}
   
   async create(data: CarData): Promise<Car> {
-    const user = new this.carModel(data);
-    return user.save();
+    const car = new this.carModel(data);
+    return car.save();
   }
 
   async findById(id: string): Promise<Car> {
