@@ -15,7 +15,7 @@ import {
   import { ClientGrpc } from '@nestjs/microservices';
   import { promisify } from '../../utils';
   
-  @Controller('api/v1/car')
+  @Controller('api/v1/cars')
   export class CarController implements OnModuleInit {
     private carService: CarService;
     constructor(@Inject('CAR_PACKAGE') private client: ClientGrpc) {}
