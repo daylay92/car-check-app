@@ -19,6 +19,6 @@ import {
 })
 export class UserModule implements NestModule {
   configure(consumer: MiddlewareConsumer): void {
-    consumer.apply(AuthenticateMiddleware).forRoutes(UserController).apply(UserMiddleware, UserMiddleware.VerifyOwner).forRoutes('api/v1/users/:userId/wallet', 'api/v1/users/:userId');
+    consumer.apply(AuthenticateMiddleware).forRoutes(UserController).apply(UserMiddleware, UserMiddleware.VerifyOwner()).forRoutes('api/v1/users/:userId/wallet', 'api/v1/users/:userId');
   }
 }

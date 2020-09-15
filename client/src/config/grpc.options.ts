@@ -42,6 +42,16 @@ export const walletServiceOptions: ServiceOptions = {
     },
   };
 
+  export const orderServiceOptions: ServiceOptions = {
+    name: 'ORDER_PACKAGE',
+    transport: Transport.GRPC,
+    options: {
+      package: 'car',
+      protoPath: join(__dirname, '../../../proto/order.proto'),
+      url: config()['ORDER_SERVICE_URL'],
+    },
+  };
+
 interface ServiceOptions extends GrpcOptions {
   name: string;
 }

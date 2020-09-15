@@ -45,15 +45,18 @@ export class UserMiddleware implements NestMiddleware {
     }
   }
 
-  static VerifyOwner(req: Request, res: Response, next: Function):void {
-    //@ts-ignore
-    if(req.data.id === req.params.userId) next();
-    else {
-        res.status(403).json({
-            status: 'error',
-            message: "You do not have the permission to impersonate the owner"
-        })
-    }
-  };
+  static VerifyOwner(prop = 'params'){
+    return (req: Request, res: Response, next: Function): void => {
+      //@ts-ignore
+      if(req.data.id === req[prop].userId) next();
+      else {
+          res.status(403).json({
+              status: 'error',
+              message: "You do not have the permission to impersonate the owner"
+          })
+      }
+    };
+  }
+  
 
 }
