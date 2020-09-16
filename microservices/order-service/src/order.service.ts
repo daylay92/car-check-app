@@ -2,14 +2,16 @@
 import { Injectable } from '@nestjs/common';
 import { Order } from './order.schema';
 import { Model } from 'mongoose';
-import { OrderData, OrderList } from '../../../proto/build/order';
+import { NewDBOrder } from './interfaces/new.order.interface'
+import {  OrderList } from '../../../proto/build/order';
 import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class OrderService {
   constructor(@InjectModel(Order.name) private orderModel: Model<Order>) {}
 
-  async create(data: OrderData): Promise<Order> {
+  async create(data: NewDBOrder): Promise<Order> {
+
     const order = new this.orderModel(data);
     return order.save();
   }

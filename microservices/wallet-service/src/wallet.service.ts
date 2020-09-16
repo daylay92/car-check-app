@@ -40,6 +40,7 @@ export class WalletService {
     const oldBalance = wallet.balance;
     const newBalance = oldBalance - amount;
     if (newBalance < 0) throw new RpcException('Insufficient funds');
+    wallet.balance = newBalance;
     await wallet.save();
     return {
       id: wallet.id,

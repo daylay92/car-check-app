@@ -30,11 +30,12 @@ import {
         const order = await this.orderService.Create(data);
         return order;
       } catch (e) {
-        throw new HttpException(e.details, 500);
+          const regex = /funds/i
+        throw new HttpException(e.details, regex.test(e.details)? 400: 500);
       }
     }
 
-    @HttpCode(201)
+    @HttpCode(200)
     @Get()
     async fetchAll(): Promise<OrderList> {
       try {

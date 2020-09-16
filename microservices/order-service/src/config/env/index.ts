@@ -7,6 +7,7 @@ type Config = {
   PORT: string;
   WALLET_SERVICE_URL: string;
   CAR_SERVICE_URL: string;
+  USER_SERVICE_URL: string;
 };
 
 export default (): Config => {
@@ -14,6 +15,7 @@ export default (): Config => {
     PORT: process.env.PORT,
     WALLET_SERVICE_URL: process.env.WALLET_SERVICE_URL,
     CAR_SERVICE_URL: process.env.CAR_SERVICE_URL,
+    USER_SERVICE_URL: process.env.USER_SERVICE_URL
   };
   const config = {
     development,

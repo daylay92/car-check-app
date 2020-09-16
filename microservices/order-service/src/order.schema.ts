@@ -5,12 +5,11 @@ import { Document, Types } from 'mongoose';
 export class Order extends Document {
   @Prop({
     required: true,
-    ref: 'User',
-    unique: true,
+    ref: 'User'
   })
   user: Types.ObjectId;
 
-  @Prop({ required: true, ref: 'Car', unique: true })
+  @Prop({ required: true, ref: 'Car' })
   car: Types.ObjectId;
 
   @Prop({

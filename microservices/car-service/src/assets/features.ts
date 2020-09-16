@@ -10,4 +10,6 @@ export const featureList =[
     'Electric Engine',
     'Gasoline Engine',
     'Diesel Engine',
+    'Automatic Transmission',
+    'Manual Transmission'
   ]
