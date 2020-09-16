@@ -4,13 +4,13 @@ import { OrderService } from './order.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Order, OrderSchema } from './order.schema';
 import { ClientsModule } from '@nestjs/microservices';
-import { carServiceOptions, walletServiceOptions, userServiceOptions } from './config/grpc.options';
+import { carServiceOptions, walletServiceOptions, userServiceOptions, emailServiceOptions } from './config/grpc.options';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/env';
 
 @Module({
   imports: [
-    ClientsModule.register([carServiceOptions, walletServiceOptions, userServiceOptions]),
+    ClientsModule.register([carServiceOptions, walletServiceOptions, userServiceOptions, emailServiceOptions ]),
     ConfigModule.forRoot({
       load: [configuration],
     }),
