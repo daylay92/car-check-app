@@ -15,7 +15,8 @@ export default (): Config => {
     PORT: process.env.PORT,
     WALLET_SERVICE_URL: process.env.WALLET_SERVICE_URL,
     CAR_SERVICE_URL: process.env.CAR_SERVICE_URL,
-    USER_SERVICE_URL: process.env.USER_SERVICE_URL
+    USER_SERVICE_URL: process.env.USER_SERVICE_URL,
+    EMAIL_SERVICE_URL: process.env.EMAIL_SERVICE_URL,
   };
   const config = {
     development,

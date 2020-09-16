@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package email;
+
+import "google/protobuf/empty.proto";
+
+service NotificationService {
+  rpc NotifyPurchase (NoticeData) returns (google.protobuf.Empty) {}
+}
+
+message NoticeData {
+    string firstName = 1;
+    string make = 2;
+    string vin = 3;
+    string carModel = 4;
+    string email = 5;
+}

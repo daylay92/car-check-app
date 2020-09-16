@@ -40,7 +40,6 @@ export class AuthController {
     const isUserExist = await this.authService.verifyUserExist(data.email);
     if(isUserExist.isExist) throw new RpcException('Email already Exist');
     const hash = this.authService.hashPassword(data.password);
-    console.log(this.authService.hashPassword('admin01'))
     const user = await this.authService.register({ ...data, hash });
     const token = this.authService.generateToken({
       id: user.id,

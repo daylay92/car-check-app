@@ -8,6 +8,7 @@ import { CarService } from '../../../proto/build/car';
 import { WalletService } from '../../../proto/build/wallet';
 import { UserService } from '../../../proto/build/user';
 import { NewOrder, OrderData, OrderList } from '../../../proto/build/order';
+import { NotificationService } from '../../../proto/build/email';
 import { Empty } from '../../../proto/build/google/protobuf/empty';
 import { Metadata } from 'grpc';
 
@@ -16,12 +17,14 @@ export class OrderController {
   private carService: CarService;
   private walletService: WalletService;
   private userService: UserService;
+  private emailService: NotificationService;
   @Inject(OrderService)
   private orderService: OrderService;
   constructor(
     @Inject('CAR_PACKAGE') private carClient: ClientGrpc,
     @Inject('WALLET_PACKAGE') private walletClient: ClientGrpc,
     @Inject('USER_PACKAGE') private userClient: ClientGrpc,
+    @Inject('EMAIL_PACKAGE') private emailClient: ClientGrpc,
   ) {}
   onModuleInit(): void {
     this.carService = promisify(
@@ -32,6 +35,9 @@ export class OrderController {
     );
     this.userService = promisify(
       this.userClient.getService<UserService>('UserService'),
+    );
+    this.emailService = promisify(
+      this.emailClient.getService<NotificationService>('NotificationService'),
     );
   }
   @GrpcMethod('OrderService', 'Create')
@@ -57,8 +63,15 @@ export class OrderController {
         total,
         totalCost,
       });
-      const { firstName, lastName } = await this.userService.FindUser({
+      const { firstName, lastName, email } = await this.userService.FindUser({
         id: userId,
+      });
+      this.emailService.NotifyPurchase({
+        firstName,
+        make,
+        vin,
+        carModel,
+        email,
       });
       return {
         id: order.id,

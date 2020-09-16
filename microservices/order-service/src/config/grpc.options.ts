@@ -42,6 +42,16 @@ export const userServiceOptions: ServiceOptions = {
   },
 };
 
+export const emailServiceOptions: ServiceOptions = {
+  name: 'EMAIL_PACKAGE',
+  transport: Transport.GRPC,
+  options: {
+    package: 'email',
+    protoPath: join(__dirname, '../../../../proto/email.proto'),
+    url: config()['EMAIL_SERVICE_URL'],
+  },
+};
+
 interface ServiceOptions extends GrpcOptions {
   name: string;
 }
