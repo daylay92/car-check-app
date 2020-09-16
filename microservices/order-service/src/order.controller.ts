@@ -83,7 +83,37 @@ export class OrderController {
   async fetchAllOrder(_data: Empty, _metadata: Metadata): Promise<OrderList> {
     try {
       const result = await this.orderService.findAll();
-      return result;
+      const orderList = result.map(async order => {
+        const { car, user, id, total, totalCost, createdAt, updatedAt } = order;
+        const userId = String(user);
+        const carId = String(car);
+        const userData = this.userService.FindUser({
+          id: userId,
+        });
+        const carData = this.carService.FindCar({
+          id: carId,
+        });
+        const [
+          { firstName, lastName },
+          { carModel, make, vin },
+        ] = await Promise.all([userData, carData]);
+        return {
+          id,
+          userId,
+          firstName,
+          lastName,
+          carId,
+          make,
+          vin,
+          carModel,
+          total,
+          totalCost,
+          createdAt: createdAt.toISOString(),
+          updatedAt: updatedAt.toISOString(),
+        };
+      });
+      const orders = await Promise.all(orderList);
+      return { orders };
     } catch (e) {
       throw new RpcException('Error fetching all orders');
     }
