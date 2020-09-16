@@ -6,7 +6,7 @@ export const microserviceOptions: ClientOptions = {
   transport: Transport.GRPC,
   options: {
     package: 'notification',
-    protoPath: join(__dirname, '../../../../proto/notification.proto'),
+    protoPath: join(__dirname, '../../../../proto/email.proto'),
     url: `localhost:${config()['PORT']}`,
   },
 };
