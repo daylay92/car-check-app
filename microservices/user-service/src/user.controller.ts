@@ -87,7 +87,6 @@ export class UserController {
   @GrpcMethod('UserService', 'DoesUserExistByEmail')
   async doesUserExistByEmail({ email }): Promise<IsValid> {
     const user = await this.userService.findByEmail(email);
-    console.log(user)
     return { isExist: user ? true : false };
   }
 }

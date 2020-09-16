@@ -21,7 +21,6 @@ export class WalletController {
     const { id, owner, balance, createdAt } = await this.walletService.create(
       userData,
     );
-    console.log(id, owner, balance);
     return {
       id,
       owner: String(owner),

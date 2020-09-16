@@ -7,7 +7,6 @@ export const promisify = <T extends object>(service: T): T =>
     get: <U, F>(service: U, methodName: string) => async (
       ...params: F[]
     ): Promise<F> => {
-      console.log(service);
       return await service[toCamelCase(methodName)](...params).toPromise();
     },
   });

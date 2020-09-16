@@ -30,7 +30,6 @@ export class UserMiddleware implements NestMiddleware {
       }
     } catch (e) {
         const regex = /User/i;
-        console.log(e);
       if (regex.test(e.details)) {
         res.status(400).json({
           status: 'error',

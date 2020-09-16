@@ -6,7 +6,6 @@ type Config = {
   DATABASE_URL: string;
   PORT: string;
 };
-console.log(process.env.DATABASE_DEV_URL)
 export default (): Config => {
   const defaults = {
     PORT: process.env.PORT,
