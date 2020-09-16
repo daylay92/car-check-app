@@ -3,6 +3,7 @@ import { BullModule } from '@nestjs/bull';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { NotificationController } from './notification.controller';
 import { NotificationService } from './notification.service';
+import { NotificationConsumer } from './notification.consumer';
 import configuration from './config/env';
 
 @Module({
@@ -17,7 +18,7 @@ import configuration from './config/env';
           port: +configService.get('REDIS_PORT'),
         },
         defaultJobOptions: {
-          delay: 300000,
+          // delay: 300000,
           attempts: 5,
           backoff: {
             type: 'exponential',
@@ -30,6 +31,6 @@ import configuration from './config/env';
     }),
   ],
   controllers: [NotificationController],
-  providers: [NotificationService],
+  providers: [NotificationService, NotificationConsumer],
 })
 export class NotificationModule {}

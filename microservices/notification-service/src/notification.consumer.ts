@@ -18,13 +18,9 @@ const logger = new Logger('Notification Service Events');
 @Processor('email-notification')
 export class NotificationConsumer {
   @Process()
-  async sendMail(job: Job): Promise<void> {
-    try {
+  async sendMail(job: Job): Promise<unknown> {
       await sendMail(job.data);
-      job.moveToCompleted('done', true);
-    } catch (e) {
-      job.moveToFailed({ message: e.message });
-    }
+      return {};
   }
 
   @OnQueueActive()
