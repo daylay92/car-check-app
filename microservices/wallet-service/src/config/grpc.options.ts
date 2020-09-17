@@ -7,7 +7,7 @@ export const microserviceOptions: ClientOptions = {
   options: {
     package: 'wallet',
     protoPath: join(__dirname, '../../../../proto/wallet.proto'),
-    url: `localhost:${config()['PORT']}`,
+    url: `0.0.0.0:${config()['PORT']}`,
   },
 };
 

@@ -7,7 +7,7 @@ export const microserviceOptions: ClientOptions = {
   options: {
     package: 'car',
     protoPath: join(__dirname, '../../../../proto/car.proto'),
-    url: `localhost:${config()['PORT']}`,
+    url: `0.0.0.0:${config()['PORT']}`,
   },
 };
 

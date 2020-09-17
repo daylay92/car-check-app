@@ -1,0 +1,141 @@
+version: "3"
+
+services: 
+    gateway-service:
+        build: 
+            context: .
+            dockerfile: ./client/Dockerfile
+        env_file: 
+            - .env
+        environment:
+            - USER_SERVICE_URL=user-service:4502
+            - CAR_SERVICE_URL=car-service:4507
+            - AUTH_SERVICE_URL=authentication-service:5302
+            - WALLET_SERVICE_URL=wallet-service:4500
+            - ORDER_SERVICE=order-service:4503
+            - PORT=6000
+        ports:
+            - '3000:6000'
+        command: ['node', './dist/src/src/main']
+        depends_on: 
+            - authentication-service
+            - user-service
+            - car-service
+            - order-service
+            - wallet-service
+    
+    authentication-service:
+        build:
+            context: .
+            dockerfile: ./microservices/authentication-service/Dockerfile
+        env_file: 
+            - .env
+        environment: 
+            - USER_SERVICE_URL=user-service:4502
+            - SECRET=IHERHIURF9783985NOGFV7NSFLHUF78RFILBJF
+            - PORT=5302
+        ports:
+            - '5302:5302'
+        command: ['node', './dist/app/src/src/main']
+        depends_on: 
+            -  user-service
+        
+    user-service:
+        build: 
+            context: .
+            dockerfile: ./microservices/user-service/Dockerfile
+        env_file: 
+            - .env
+        environment: 
+            - PORT=4502
+            - DATABASE_DEV_URL=mongodb://db:27017/test
+        ports:
+            - '4502:4502'
+        command: ['node', './dist/app/src/src/main']  
+        depends_on: 
+            - db
+
+    car-service:
+        build: 
+            context: .
+            dockerfile: ./microservices/car-service/Dockerfile
+        env_file: 
+            - .env
+        environment: 
+            - PORT=4507
+            - DATABASE_DEV_URL=mongodb://db:27017/test
+        ports:
+            - '4507:4507'
+        command: ['node', './dist/app/src/src/main']
+        depends_on: 
+            - db
+
+    wallet-service:
+        build: 
+            context: .
+            dockerfile: ./microservices/wallet-service/Dockerfile
+        env_file: 
+            - .env
+        environment: 
+            - PORT=4500
+            - DATABASE_DEV_URL=mongodb://db:27017/test
+        ports:
+            - '4500:4500'
+        command: ['node', './dist/app/src/src/main']
+        depends_on: 
+            - db
+
+    order-service:
+        build: 
+            context: .
+            dockerfile: ./microservices/order-service/Dockerfile
+        env_file: 
+            - .env
+        environment: 
+            - PORT=4503
+            - DATABASE_DEV_URL=mongodb://db:27017/test
+            - CAR_SERVICE_URL=car-service:4507
+            - USER_SERVICE_URL=user-service:4502
+            - WALLET_SERVICE_URL=wallet-service:4500
+            - EMAIL_SERVICE_URL=email-service:4504
+        ports:
+            - '4503:4503'
+        command: ['node', './dist/app/src/src/main']
+        depends_on: 
+            - db
+            - car-service
+            - email-service
+            - wallet-service
+            - user-service
+
+    email-service:
+        build: 
+            context: .
+            dockerfile: ./microservices/notification-service/Dockerfile
+        env_file: 
+            - .env
+        environment: 
+            - PORT=4504
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
+        ports:
+            - '4504:4504'
+        command: ['node', './dist/app/src/src/main']
+        depends_on: 
+            - redis
+    
+    db:
+        image: mongo
+        # environment: 
+        #     - MONGO_INITDB_ROOT_USERNAME=tester
+        #     - MONGO_INITDB_ROOT_PASSWORD=test
+        ports:
+            - 27017:27017
+        volumes:
+            - mongodb_data_container:/data/db
+
+    redis:
+        image: "redis:alpine"
+
+volumes:
+    mongodb_data_container:

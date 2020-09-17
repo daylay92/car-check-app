@@ -8,6 +8,7 @@ type Config = {
   WALLET_SERVICE_URL: string;
   CAR_SERVICE_URL: string;
   USER_SERVICE_URL: string;
+  EMAIL_SERVICE_URL: string;
 };
 
 export default (): Config => {
