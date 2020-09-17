@@ -57,7 +57,7 @@ docker-compose up --build
 
 ## API
 
-The API is currently in version 1 (v1) and can be found at [Base URL](http://localhost:3000). Please note that the app must be running before you can interact with the APIs
+The API is currently in version 1 (v1) and can be found at [Base URL](http://localhost:3000). Please note that the app must be running on your local machine before you can interact with the APIs.
 
 ## API Documentation
 
