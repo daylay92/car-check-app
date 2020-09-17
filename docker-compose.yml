@@ -12,7 +12,7 @@ services:
             - CAR_SERVICE_URL=car-service:4507
             - AUTH_SERVICE_URL=authentication-service:5302
             - WALLET_SERVICE_URL=wallet-service:4500
-            - ORDER_SERVICE=order-service:4503
+            - ORDER_SERVICE_URL=order-service:4503
             - PORT=6000
         ports:
             - '3000:6000'

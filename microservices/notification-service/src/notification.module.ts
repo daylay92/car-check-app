@@ -18,7 +18,7 @@ import configuration from './config/env';
           port: +configService.get('REDIS_PORT'),
         },
         defaultJobOptions: {
-          // delay: 300000,
+          delay: 300000,
           attempts: 5,
           backoff: {
             type: 'exponential',

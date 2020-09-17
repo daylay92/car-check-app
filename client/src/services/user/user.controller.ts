@@ -16,7 +16,9 @@ import { WalletDetails, TransactDetails } from '../../../../proto/build/wallet';
 import { ClientGrpc } from '@nestjs/microservices';
 import { UserData } from './interfaces/user.interface'
 import { promisify } from '../../utils';
+import { ApiBadRequestResponse, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('User Service')
 @Controller('api/v1/users')
 export class UserController implements OnModuleInit {
   private userService: UserService;
@@ -32,6 +34,11 @@ export class UserController implements OnModuleInit {
   }
   @HttpCode(200)
   @Get(':userId')
+  @ApiOkResponse({ description: 'Successfully retrieved user.' })
+  @ApiInternalServerErrorResponse({
+    description: 'An occurred while processing the request',
+  })
+  @ApiBadRequestResponse({ description: 'User ID is invalid or does not exist of any user.' })
   async getUser(@Param('userId') userId: string): Promise<UserData> {
     try {
       const res = await this.userService.FindUser({id: userId});
@@ -42,6 +49,12 @@ export class UserController implements OnModuleInit {
       throw new HttpException(e.details, regex.test(e.details) ? 400 : 500);
     }
   }
+
+  @ApiOkResponse({ description: 'Successfully retrieved wallet balance.' })
+  @ApiInternalServerErrorResponse({
+    description: 'An occurred while processing the request',
+  })
+  @ApiBadRequestResponse({ description: 'User ID is invalid or User wallet cannot be found.' })
   @HttpCode(200)
   @Get(':userId/wallet')
   async getBalance(@Param('userId') userId: string): Promise<WalletDetails> {
@@ -56,6 +69,11 @@ export class UserController implements OnModuleInit {
 
   @HttpCode(200)
   @Patch(':userId/wallet')
+  @ApiOkResponse({ description: 'Successfully topup user wallet.' })
+  @ApiInternalServerErrorResponse({
+    description: 'An occurred while processing the request',
+  })
+  @ApiBadRequestResponse({ description: 'User ID is invalid or User wallet cannot be found.' })
   async topWallet(
     @Param('userId') userId: string,
     @Body() { amount }: WalletAmountDto,
