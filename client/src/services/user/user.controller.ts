@@ -16,9 +16,10 @@ import { WalletDetails, TransactDetails } from '../../../../proto/build/wallet';
 import { ClientGrpc } from '@nestjs/microservices';
 import { UserData } from './interfaces/user.interface'
 import { promisify } from '../../utils';
-import { ApiBadRequestResponse, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiBearerAuth, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('User Service')
+@ApiBearerAuth()
 @Controller('api/v1/users')
 export class UserController implements OnModuleInit {
   private userService: UserService;

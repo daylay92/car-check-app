@@ -11,7 +11,7 @@ async function bootstrap() {
     .setDescription('A collection of APIs for the Car Check Service.')
     .setVersion('1.0')
     .addTag('App')
-    .addBearerAuth()
+    .addBearerAuth({ in: 'header', type: 'http' })
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);

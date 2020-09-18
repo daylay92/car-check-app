@@ -20,7 +20,7 @@ import {
 } from '../../../../proto/build/car';
 import { ClientGrpc } from '@nestjs/microservices';
 import { promisify } from '../../utils';
-import { ApiBadRequestResponse, ApiCreatedResponse, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiInternalServerErrorResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Car Service')
 @Controller('api/v1/cars')
@@ -52,6 +52,7 @@ export class CarController implements OnModuleInit {
 
   @HttpCode(200)
   @Get()
+  @ApiBearerAuth()
   @ApiOkResponse({ description: 'Successfully Retrieved cars' })
   @ApiInternalServerErrorResponse({
     description: 'An occurred while processing the request',
